@@ -1,1 +1,1 @@
-export * from "./ThemeContext.ts";
+export * from "./ThemeContext.tsx";
