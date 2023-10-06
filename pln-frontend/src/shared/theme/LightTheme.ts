@@ -13,44 +13,44 @@ const BaseTheme = createTheme({
       disabled: "#9e9e9e",
     },
     primary: {
-      main: "#157AFF",
-      dark: "#1E88E5",
-      light: "#42A5F5",
+      main: "#ff78b7",
+      dark: "#f5007d",
+      light: "#ffe0ee",
       contrastText: "#FFFFFF",
     },
     secondary: {
-      main: "#9C27B0",
-      dark: "#7B1FA2",
-      light: "#BA68C8",
+      main: "#78ffc0",
+      dark: "#00f695",
+      light: "#e1fff0",
       contrastText: "#FFFFFF",
     },
     error: {
-      main: "#D32F2F",
-      dark: "#C62828",
-      light: "#EF5350",
+      main: "#ff7878",
+      dark: "#ff4536",
+      light: "#ffd0d6",
       contrastText: "#FFFFFF",
     },
     warning: {
-      main: "#ED6C02",
-      dark: "#E65100",
-      light: "#FF9800",
+      main: "#ffe878",
+      dark: "#fcde3e",
+      light: "#fff5c4",
       contrastText: "#FFFFFF",
     },
     info: {
-      main: "#0288D1",
-      dark: "#01579B",
-      light: "#03A9F4",
+      main: "#ff78fa",
+      dark: "#e700e3",
+      light: "#ffe1fe",
       contrastText: "#FFFFFF",
     },
     success: {
-      main: "#2E7D32",
-      dark: "#1B5E20",
-      light: "#4CAF50",
+      main: "#8eff78",
+      dark: "#4ef835",
+      light: "#d4ffc8",
       contrastText: "#FFFFFF",
     },
     background: {
       default: "#FFFFFF",
-      paper: "#FFFFFF",
+      paper: "#fafafa",
     },
   },
   typography: {
@@ -113,4 +113,4 @@ const options = {
   factor: 5,
 };
 
-export const AppTheme = responsiveFontSizes(BaseTheme, options);
+export const LightTheme = responsiveFontSizes(BaseTheme, options);

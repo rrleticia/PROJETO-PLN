@@ -1,1 +1,2 @@
-export * from "./Theme.ts";
+export * from "./LightTheme.ts";
+export * from "./DarkTheme.ts";
