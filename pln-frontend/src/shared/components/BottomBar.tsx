@@ -1,4 +1,4 @@
-import { Box, Button, useTheme } from '@mui/material';
+import { Box, useTheme } from '@mui/material';
 import { useAppThemeContext } from '../contexts';
 
 export const BottomBar = () => {
@@ -18,6 +18,8 @@ export const BottomBar = () => {
         justifyContent: 'flex-start',
         alignItems: 'center',
 
+        height: '15vh',
+
         position: 'fixed',
         bottom: 0,
         left: 0,
@@ -28,9 +30,7 @@ export const BottomBar = () => {
         py: theme.spacing(1),
       }}
     >
-      <Box sx={{ display: 'flex', flex: 1 }}>
-        <Button onClick={handleClick}>Button</Button>
-      </Box>
+      <Box sx={{ display: 'flex', flex: 1, flexDirection: 'column' }}></Box>
     </Box>
   );
 };
