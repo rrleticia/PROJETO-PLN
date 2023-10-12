@@ -8,80 +8,82 @@ import {
   useTheme,
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import { BottomBar } from '../../shared/components';
+import { useNavigate } from 'react-router-dom';
 
 export const HomePage = () => {
   return (
     <Box
       sx={{
         display: 'flex',
+        flex: 1,
         flexDirection: 'column',
+        height: '100%',
       }}
     >
-      <Box sx={{ display: 'flex', flex: 1 }}>
+      <Card
+        sx={{
+          display: 'flex',
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: 'background.default',
+        }}
+      >
         <CenterWidget />
-      </Box>
-
-      <Box sx={{ display: 'flex', flex: 1 }}>
-        <BottomBar />
-      </Box>
+      </Card>
     </Box>
   );
 };
 
 const CenterWidget = () => {
   const theme = useTheme();
+
   return (
-    <Card
+    <CardContent
       sx={{
         display: 'flex',
-        flex: 1,
-        height: '85vh',
+        flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        backgroundColor: 'background.default',
       }}
     >
-      <CardContent
+      <Typography variant='h1'>Recipe</Typography>
+      <Box
         sx={{
           display: 'flex',
-          flexDirection: 'column',
+          flexDirection: 'row',
           alignItems: 'center',
+          justifyContent: 'center',
         }}
       >
-        <Typography variant='h1'>Recipe</Typography>
-        <Box
+        <Typography
+          variant='h1'
           sx={{
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
+            pr: theme.spacing(1),
           }}
         >
-          <Typography
-            variant='h1'
-            sx={{
-              pr: theme.spacing(1),
-            }}
-          >
-            Maker
-          </Typography>
-          <CardMedia
-            image={'/assets/cake.svg'}
-            style={{
-              height: '8vw',
-              width: '8vw',
-            }}
-          ></CardMedia>
-        </Box>
-        <NextButton />
-      </CardContent>
-    </Card>
+          Maker
+        </Typography>
+        <CardMedia
+          image={'/assets/cake.svg'}
+          style={{
+            height: '8vw',
+            width: '8vw',
+          }}
+        ></CardMedia>
+      </Box>
+      <NextButton />
+    </CardContent>
   );
 };
 
 const NextButton = () => {
   const theme = useTheme();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/info`);
+  };
+
   return (
     <Box
       sx={{
@@ -96,6 +98,7 @@ const NextButton = () => {
         variant='contained'
         size='large'
         endIcon={<SendIcon />}
+        onClick={handleClick}
       >
         <Typography variant='h6'>Start</Typography>
       </Button>
