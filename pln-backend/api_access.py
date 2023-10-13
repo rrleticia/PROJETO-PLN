@@ -5,7 +5,8 @@ openai.api_key = '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'
 messages = [ {"role": "system", "content":  
               "You are a intelligent assistant."} ] 
 while True: 
-    message = input("User : ") 
+    message = input("User : ")
+    print(message)
     if message: 
         messages.append( 
             {"role": "user", "content": message}, 

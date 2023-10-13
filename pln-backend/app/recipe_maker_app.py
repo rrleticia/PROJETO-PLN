@@ -1,16 +1,16 @@
 from entities.cart import Cart
-from entities.food import Food, foods_set
+from entities import food
 
 class RecipeMakerApp:
 
     def __init__(self):
         self.cart = Cart()
-        self.foods = foods_set
+        # self.foods = food.foods_set
     
-    def add_food_to_cart(self, food: Food):
+    def add_food_to_cart(self, food: food.Food):
         self.cart.add_food(food)
 
-    def remove_food_from_cart(self, food: Food):
+    def remove_food_from_cart(self, food: food.Food):
         self.cart.remove_food(food)
 
     def get_food_by_name(self, name: str):
