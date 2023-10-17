@@ -1,5 +1,4 @@
 import { Box } from '@mui/material';
-import { red } from '@mui/material/colors';
 
 interface IExpandedBoxProps {
   type?: string;
@@ -28,6 +27,7 @@ export const ExpandedBox: React.FC<IExpandedBoxProps> = ({
 
         display: 'flex',
         flex: 1,
+        flexGrow: 1,
         flexDirection: type ?? 'column',
 
         justifyContent: mainAxis ?? 'flex-start',

@@ -81,7 +81,7 @@ const NextButton = () => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/info`);
+    navigate(`/search`);
   };
 
   return (

@@ -14,14 +14,14 @@ const BaseTheme = createTheme({
     },
     primary: {
       main: '#ff7d88',
-      dark: '#f0404f',
+      dark: '#a53038',
       light: '#f0404f',
       contrastText: '#FFFFFF',
     },
     secondary: {
-      main: '#78ffc0',
-      dark: '#00f695',
-      light: '#e1fff0',
+      main: '#4f705f',
+      dark: '#344c44',
+      light: '#72b19a',
       contrastText: '#FFFFFF',
     },
     error: {
@@ -49,7 +49,7 @@ const BaseTheme = createTheme({
       contrastText: '#FFFFFF',
     },
     background: {
-      default: '#FFFFFF',
+      default: '#ffffff',
       paper: '#e6e6e6',
     },
   },

@@ -1,8 +1,10 @@
 import { createContext, useContext, useState } from 'react';
 
 interface IDrawerContextData {
-  showDrawer: boolean;
-  toggleDrawer: () => void;
+  showMenu: boolean;
+  toggleMenu: () => void;
+  showCart: boolean;
+  toggleCart: () => void;
 }
 
 const DrawerContext = createContext({} as IDrawerContextData);
@@ -18,14 +20,22 @@ interface IDrawerContextProps {
 export const DrawerContextProvider: React.FC<IDrawerContextProps> = ({
   children,
 }) => {
-  const [showDrawer, setShowDrawer] = useState(false);
+  const [showMenu, setShowMenu] = useState(false);
 
-  const toggleDrawer = () => {
-    setShowDrawer(showDrawer === true ? false : true);
+  const [showCart, setShowCart] = useState(false);
+
+  const toggleMenu = () => {
+    setShowMenu(showMenu === true ? false : true);
+  };
+
+  const toggleCart = () => {
+    setShowCart(showCart === true ? false : true);
   };
 
   return (
-    <DrawerContext.Provider value={{ showDrawer, toggleDrawer }}>
+    <DrawerContext.Provider
+      value={{ showMenu, toggleMenu, showCart, toggleCart }}
+    >
       {children}
     </DrawerContext.Provider>
   );
