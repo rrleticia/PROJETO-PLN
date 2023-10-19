@@ -1,26 +1,22 @@
 import { Button, useTheme } from '@mui/material';
-import { Food } from '../models';
 import { useState } from 'react';
-import { useAppFoodContext } from '../contexts';
 
 interface IListButtonProps {
-  food: Food;
+  value: String;
 }
 
-export const ListButton: React.FC<IListButtonProps> = ({ food }) => {
+export const ListButton: React.FC<IListButtonProps> = ({ value }) => {
   const theme = useTheme();
   const [selected, setSelected] = useState(false);
 
-  // const { selectedFood } = useAppFoodContext();
-
   const handleClick = () => {
     setSelected(selected ? false : true);
-    selectedFood(food);
+    // selectedFood(food);
   };
 
-  const selectedFood = (food: any) => {
-    food.selected = food.selected ? false : true;
-  };
+  // const selectedFood = (food: any) => {
+  //   food.selected = food.selected ? false : true;
+  // };
 
   return (
     <Button
@@ -37,7 +33,7 @@ export const ListButton: React.FC<IListButtonProps> = ({ food }) => {
         typography: 'body2',
       }}
     >
-      {food.name}
+      {value}
     </Button>
   );
 };

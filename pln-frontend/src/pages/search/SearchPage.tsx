@@ -19,8 +19,8 @@ import { DrawerHeader, ExpandedBox, ListButton } from '../../shared/components';
 import {
   DrawerContextProvider,
   useAppDrawerContext,
-  useAppFoodContext,
 } from '../../shared/contexts';
+import { Difficulty, Drink, Nutrition } from '../../shared/models';
 
 export const SearchPage = () => {
   return (
@@ -62,7 +62,7 @@ const SearchBar = () => {
         sx={{ padding: theme.spacing(1.25) }}
         aria-label='search'
       >
-        <SearchIcon />
+        <AddIcon />
       </IconButton>
 
       <Divider
@@ -74,7 +74,7 @@ const SearchBar = () => {
         sx={{ color: 'secondary.light', padding: theme.spacing(1.25) }}
         aria-label='directions'
       >
-        <ShoppingCartIcon onClick={toggleCart} />
+        <SearchIcon onClick={toggleCart} />
       </IconButton>
     </Paper>
   );
@@ -94,8 +94,8 @@ const SideMenu = () => {
         }}
       >
         <DrawerHeader
-          title={'Ingredients'}
-          leftIcon={<AddIcon />}
+          title={'Options'}
+          leftIcon={<ShoppingCartIcon />}
           rightIcon={<ChevronLeftIcon />}
           onClickRight={toggleMenu}
           quant={0}
@@ -106,10 +106,10 @@ const SideMenu = () => {
   );
 };
 
-const MenuBody = () => {
+export const MenuBody = () => {
   const theme = useTheme();
 
-  const { categories } = useAppFoodContext();
+  const options = [Difficulty, Drink, Nutrition];
 
   return (
     <List
@@ -122,7 +122,7 @@ const MenuBody = () => {
         mx: theme.spacing(1.5),
       }}
     >
-      {categories.map((category) => {
+      {options.map((option) => {
         return (
           <Box
             sx={{
@@ -152,7 +152,7 @@ const MenuBody = () => {
                   px: theme.spacing(1.5),
                 }}
               >
-                {category.name}
+                {option.NAME}
               </Typography>
             </Box>
 
@@ -168,8 +168,8 @@ const MenuBody = () => {
                 px: theme.spacing(0.5),
               }}
             >
-              {category.foods.map((food) => {
-                return <ListButton food={food} />;
+              {Object.entries(option).map(([key, value]) => {
+                if (key != 'NAME') return <ListButton value={value} />;
               })}
             </Box>
           </Box>

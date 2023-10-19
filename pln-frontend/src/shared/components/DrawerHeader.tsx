@@ -68,7 +68,7 @@ export const DrawerHeader: React.FC<IDrawerHeaderProps> = ({
           pb: theme.spacing(3),
         }}
       >
-        You have {quant} ingredients.
+        You have selected {quant} options.
       </Typography>
     </Box>
   );
