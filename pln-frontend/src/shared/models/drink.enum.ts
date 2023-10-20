@@ -4,4 +4,5 @@ export enum Drink {
   ZERO_SUGAR = 'ZERO-SUGAR',
   JUICE = 'JUICE',
   SODA = 'SODA',
+  NONE = 'NONE',
 }

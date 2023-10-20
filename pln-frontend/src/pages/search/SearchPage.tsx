@@ -1,5 +1,8 @@
 import {
+  Alert,
+  AlertTitle,
   Box,
+  Dialog,
   Divider,
   Drawer,
   IconButton,
@@ -11,16 +14,23 @@ import {
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchIcon from '@mui/icons-material/Search';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import AddIcon from '@mui/icons-material/Add';
-import { DrawerHeader, ExpandedBox, ListButton } from '../../shared/components';
-
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import {
+  DrawerHeader,
+  ExpandedBox,
+  ListButton,
+  ListFood,
+} from '../../shared/components';
 import {
   DrawerContextProvider,
   useAppDrawerContext,
+  useAppFoodContext,
 } from '../../shared/contexts';
 import { Difficulty, Drink, Nutrition } from '../../shared/models';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export const SearchPage = () => {
   return (
@@ -35,53 +45,137 @@ export const SearchPage = () => {
 
 const SearchBar = () => {
   const theme = useTheme();
-  const { toggleMenu, toggleCart } = useAppDrawerContext();
+  const navigate = useNavigate();
+
+  const { toggleMenu } = useAppDrawerContext();
+  const { cart, addToCart } = useAppFoodContext();
+
+  const [input, setInput] = useState('');
+  const [alert, setAlert] = useState<boolean>(false);
+
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', width: '30vw' }}>
+      <Paper
+        component='form'
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+
+          paddingTop: theme.spacing(0.25),
+          paddingRight: theme.spacing(0.5),
+        }}
+      >
+        <IconButton sx={{ padding: theme.spacing(1.25) }} aria-label='menu'>
+          <MenuIcon onClick={toggleMenu} />
+        </IconButton>
+
+        <InputBase
+          sx={{ ml: theme.spacing(0.25), flex: 1 }}
+          placeholder='Insert Food'
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+        />
+
+        <IconButton
+          type='button'
+          sx={{ padding: theme.spacing(1.25) }}
+          aria-label='search'
+        >
+          <AddIcon
+            onClick={() => {
+              if (input.length > 0) {
+                addToCart(input);
+                setInput('');
+              }
+            }}
+          />
+        </IconButton>
+
+        <Divider
+          sx={{ height: theme.spacing(3.75), m: 0.5 }}
+          orientation='vertical'
+        />
+
+        <IconButton
+          sx={{ color: 'secondary.light', padding: theme.spacing(1.25) }}
+          aria-label='directions'
+        >
+          <SearchIcon
+            onClick={() => {
+              if (cart.length > 0) {
+                navigate(`/recipe`);
+              } else setAlert(true);
+            }}
+          />
+        </IconButton>
+      </Paper>
+      <DisplayAlert alert={alert} setAlert={setAlert} />
+      <DisplayFoods />
+    </Box>
+  );
+};
+
+const DisplayAlert = ({ alert, setAlert }) => {
+  return (
+    <Dialog open={alert}>
+      <Alert
+        severity='error'
+        onClick={() => {
+          setAlert(false);
+        }}
+      >
+        <AlertTitle>Error</AlertTitle>
+        You have not added any food— <strong>the recipe has zero food</strong> —
+        registered for use.
+      </Alert>
+    </Dialog>
+  );
+};
+
+const DisplayFoods = () => {
+  const theme = useTheme();
+
+  const { cart } = useAppFoodContext();
 
   return (
     <Paper
-      component='form'
       sx={{
-        display: 'flex',
         alignItems: 'center',
-        width: '25vw',
-        paddingTop: theme.spacing(0.25),
-        paddingRight: theme.spacing(0.5),
+
+        mt: theme.spacing(2),
+        padding: theme.spacing(2),
       }}
     >
-      <IconButton sx={{ padding: theme.spacing(1.25) }} aria-label='menu'>
-        <MenuIcon onClick={toggleMenu} />
-      </IconButton>
+      {cart.length > 0 ? (
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: 'column',
 
-      <InputBase
-        sx={{ ml: theme.spacing(0.25), flex: 1 }}
-        placeholder='Search Recipe Maker'
-      />
-
-      <IconButton
-        type='button'
-        sx={{ padding: theme.spacing(1.25) }}
-        aria-label='search'
-      >
-        <AddIcon />
-      </IconButton>
-
-      <Divider
-        sx={{ height: theme.spacing(3.75), m: 0.5 }}
-        orientation='vertical'
-      />
-
-      <IconButton
-        sx={{ color: 'secondary.light', padding: theme.spacing(1.25) }}
-        aria-label='directions'
-      >
-        <SearchIcon onClick={toggleCart} />
-      </IconButton>
+            justifyContent: 'center',
+          }}
+        >
+          <Typography variant='body1' sx={{ display: 'flex' }}>
+            You can remove added foods by removing them from selection.
+          </Typography>
+          <List>
+            {cart.map((item) => (
+              <ListFood food={item}></ListFood>
+            ))}
+          </List>
+        </Box>
+      ) : (
+        <Typography variant='body1' sx={{ display: 'flex' }}>
+          Add foods by typing their names and clicking on the plus sign!
+        </Typography>
+      )}
     </Paper>
   );
 };
 
 const SideMenu = () => {
   const { showMenu, toggleMenu } = useAppDrawerContext();
+  const { optionsCount, optionsClear } = useAppFoodContext();
 
   return (
     <Drawer anchor='left' elevation={0} variant='persistent' open={showMenu}>
@@ -95,10 +189,11 @@ const SideMenu = () => {
       >
         <DrawerHeader
           title={'Options'}
-          leftIcon={<ShoppingCartIcon />}
+          leftIcon={<DeleteForeverIcon />}
           rightIcon={<ChevronLeftIcon />}
           onClickRight={toggleMenu}
-          quant={0}
+          onClickLeft={optionsClear}
+          quant={optionsCount}
         />
         <MenuBody />
       </Box>
@@ -123,6 +218,7 @@ export const MenuBody = () => {
       }}
     >
       {options.map((option) => {
+        const name = option.NAME;
         return (
           <Box
             sx={{
@@ -169,7 +265,8 @@ export const MenuBody = () => {
               }}
             >
               {Object.entries(option).map(([key, value]) => {
-                if (key != 'NAME') return <ListButton value={value} />;
+                if (key != 'NAME')
+                  return <ListButton name={name} key={key} value={value} />;
               })}
             </Box>
           </Box>

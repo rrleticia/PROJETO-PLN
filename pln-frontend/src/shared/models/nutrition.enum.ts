@@ -5,4 +5,5 @@ export enum Nutrition {
   GLUTEN_FREE = 'GLUTEN-FREE',
   LOW_SUGAR = 'LOW-SUGAR',
   LOW_CARB = 'LOW-CARB',
+  NONE = 'NONE',
 }

@@ -59,16 +59,34 @@ export const DrawerHeader: React.FC<IDrawerHeaderProps> = ({
           {rightIcon}
         </IconButton>
       </Box>
+
       <Typography
         variant='body1'
         sx={{
+          display: 'flex',
           color: '#FFFFFF',
           alignSelf: 'center',
-          alignContent: 'flex-start',
-          pb: theme.spacing(3),
+          alignItems: 'center',
+          justifyContent: 'center',
+
+          textAlign: 'center',
         }}
       >
-        You have selected {quant} options.
+        You have selected {quant} options. {'\n'}
+      </Typography>
+      <Typography
+        variant='body1'
+        sx={{
+          display: 'flex',
+          color: '#FFFFFF',
+          alignSelf: 'center',
+          alignItems: 'center',
+          justifyContent: 'center',
+          pb: theme.spacing(3),
+          textAlign: 'center',
+        }}
+      >
+        Select one of each options avaliable if needed.
       </Typography>
     </Box>
   );

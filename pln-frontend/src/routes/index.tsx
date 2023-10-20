@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { HomePage, SearchPage } from '../pages/index.ts';
+import { HomePage, RecipePage, SearchPage } from '../pages/index.ts';
 
 export const router = createBrowserRouter([
   {
@@ -8,4 +8,5 @@ export const router = createBrowserRouter([
   },
   { path: '/home', element: <HomePage /> },
   { path: '/search', element: <SearchPage /> },
+  { path: '/recipe', element: <RecipePage /> },
 ]);
