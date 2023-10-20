@@ -23,7 +23,7 @@ interface IRecipeContextProps {
 export const RecipeContextProvider: React.FC<IRecipeContextProps> = ({
   children,
 }) => {
-  const { cart, difficulty, nutrition, drink } = useAppFoodContext();
+  const { cart, difficulty, nutrition, drink, clearAll } = useAppFoodContext();
 
   const [recipe, setRecipe] = useState('');
   const [loading, setLoading] = useState(true);
@@ -40,6 +40,7 @@ export const RecipeContextProvider: React.FC<IRecipeContextProps> = ({
       drink
     );
     setLoading(false);
+    clearAll();
     return result.recipe;
   };
 
