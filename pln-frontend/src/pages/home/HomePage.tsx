@@ -17,7 +17,7 @@ export const HomePage = () => {
         display: 'flex',
         flex: 1,
         flexDirection: 'column',
-        height: '100%',
+        height: '100vh',
       }}
     >
       <Card
