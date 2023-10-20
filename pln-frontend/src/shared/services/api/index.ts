@@ -1,1 +1,1 @@
-export {};
+export * from './recipe/RecipeService.ts';

@@ -1,9 +1,20 @@
-import { createContext, useContext, useEffect, useMemo } from 'react';
-import { Category, Food } from '../models';
+import { createContext, useContext, useMemo, useState } from 'react';
+import { RecipeService } from '../services';
 
 interface IFoodContextData {
-  categories: Category[];
-  cart: Food[];
+  cart: String[];
+  addToCart: (food: String) => void;
+  removeFromCart: (food: String) => void;
+  optionsCount: number;
+  optionsClear: () => void;
+  difficulty: String;
+  nutrition: String;
+  drink: String;
+  setDifficulty: (difficulty: string) => void;
+  setNutrition: (nutrition: string) => void;
+  setDrink: (drink: string) => void;
+  sendRequest: () => Promise<String>;
+  clearAll: () => void;
 }
 
 const FoodContext = createContext({} as IFoodContextData);
@@ -19,66 +30,71 @@ interface IFoodContextProps {
 export const FoodContextProvider: React.FC<IFoodContextProps> = ({
   children,
 }) => {
-  const categories = [
-    {
-      id: '1',
-      name: 'Bakery',
-      foods: [
-        { id: '1', name: 'Cake', selected: false },
-        { id: '2', name: 'Cupcake', selected: false },
-      ],
-    },
-    {
-      id: '2',
-      name: 'Fruits',
-      foods: [
-        { id: '3', name: 'Apple', selected: false },
-        { id: '4', name: 'Tomato', selected: false },
-      ],
-    },
-    {
-      id: '3',
-      name: 'Sweets',
-      foods: [
-        { id: '6', name: 'Chocolate', selected: false },
-        { id: '7', name: 'Fini', selected: false },
-      ],
-    },
-    {
-      id: '4',
-      name: 'Drinks',
-      foods: [
-        { id: '8', name: 'Coffee', selected: false },
-        { id: '9', name: 'Water', selected: false },
-        { id: '10', name: 'Soda', selected: false },
-        { id: '11', name: 'Juice', selected: false },
-      ],
-    },
-    {
-      id: '5',
-      name: 'Essentials',
-      foods: [
-        { id: '12', name: 'Sugar', selected: false },
-        { id: '13', name: 'Salt', selected: false },
-        { id: '14', name: 'Chilli', selected: false },
-        { id: '15', name: 'Onions', selected: false },
-        { id: '16', name: 'Garlic', selected: false },
-      ],
-    },
-  ];
+  const [cart, setCart] = useState<String[]>([]);
+  const [difficulty, setDifficulty] = useState('');
+  const [nutrition, setNutrition] = useState('');
+  const [drink, setDrink] = useState('');
 
-  const cart: Food[] = [];
+  const addToCart = (food: String) => {
+    cart.push(food);
+    setCart(cart);
+  };
 
-  useEffect(() => {
-    categories.forEach((category) => {
-      category.foods.forEach((food) => {
-        if (food.selected) cart.push(food);
-      });
+  const removeFromCart = (food: String) => {
+    setCart(cart.filter((item) => item != food));
+  };
+
+  const optionsCount = useMemo(() => {
+    let count = 0;
+    if (difficulty.length > 0) count++;
+    if (nutrition.length > 0) count++;
+    if (drink.length > 0) count++;
+    return count;
+  }, [difficulty, nutrition, drink]);
+
+  const optionsClear = () => {
+    setDifficulty('');
+    setNutrition('');
+    setDrink('');
+  };
+
+  const sendRequest = async (): Promise<String> => {
+    const foodArray = cart.map((item) => {
+      let target = item.toLowerCase().split(' ');
+      return target.length > 0 ? target.join('-') : item;
     });
-  }, []);
-
+    const result = await RecipeService.getRecipe(
+      foodArray,
+      difficulty,
+      nutrition,
+      drink
+    );
+    return result.recipe;
+  };
+  const clearAll = () => {
+    setCart([]);
+    setDifficulty('');
+    setDrink('');
+    setNutrition('');
+  };
   return (
-    <FoodContext.Provider value={{ categories, cart }}>
+    <FoodContext.Provider
+      value={{
+        cart,
+        addToCart,
+        removeFromCart,
+        optionsCount,
+        optionsClear,
+        difficulty,
+        setDifficulty,
+        nutrition,
+        setNutrition,
+        drink,
+        setDrink,
+        sendRequest,
+        clearAll,
+      }}
+    >
       {children}
     </FoodContext.Provider>
   );
