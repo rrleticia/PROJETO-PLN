@@ -47,7 +47,26 @@ const LoadingInfo = () => {
     sendRequest;
   });
 
-  return <CircularProgress color='info' sx={{ size: theme.spacing(28) }} />;
+  return (
+    <Box
+      sx={{
+        display: 'flex',
+        height: '100vh',
+
+        justifyContent: 'center',
+        alignItems: 'center',
+
+        size: theme.spacing(28),
+      }}
+    >
+      <CircularProgress
+        color='info'
+        sx={{
+          size: theme.spacing(28),
+        }}
+      />
+    </Box>
+  );
 };
 
 const ShowRecipe = () => {
@@ -65,7 +84,13 @@ const ShowRecipe = () => {
       }}
     >
       <Paper sx={{ padding: theme.spacing(3) }}>
-        <Typography variant='body2' style={{ whiteSpace: 'pre-line' }}>
+        <Typography
+          variant='body2'
+          style={{
+            whiteSpace: 'pre-line',
+          }}
+          sx={{ maxWidth: '80vw' }}
+        >
           {recipe}
         </Typography>
       </Paper>
