@@ -44,7 +44,7 @@ const LoadingInfo = () => {
   const { sendRequest } = useAppRecipeContext();
 
   useEffect(() => {
-    sendRequest;
+    sendRequest();
   });
 
   return (
