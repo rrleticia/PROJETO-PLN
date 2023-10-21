@@ -8,17 +8,15 @@ import {
 } from '@mui/material';
 import ReplayIcon from '@mui/icons-material/Replay';
 import {
-  RecipeContextProvider,
   useAppFoodContext,
   useAppRecipeContext,
 } from '../../shared/contexts';
-
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+
 
 export const RecipePage = () => {
   return (
-    <RecipeContextProvider>
+    
       <Box
         sx={{
           display: 'flex',
@@ -30,7 +28,7 @@ export const RecipePage = () => {
       >
         <DecideComponent />
       </Box>
-    </RecipeContextProvider>
+    
   );
 };
 
@@ -41,11 +39,6 @@ const DecideComponent = () => {
 
 const LoadingInfo = () => {
   const theme = useTheme();
-  const { sendRequest } = useAppRecipeContext();
-
-  useEffect(() => {
-    sendRequest();
-  });
 
   return (
     <Box

@@ -27,6 +27,7 @@ import {
   DrawerContextProvider,
   useAppDrawerContext,
   useAppFoodContext,
+  useAppRecipeContext,
 } from '../../shared/contexts';
 import { Difficulty, Drink, Nutrition } from '../../shared/models';
 import { useState } from 'react';
@@ -49,6 +50,13 @@ const SearchBar = () => {
 
   const { toggleMenu } = useAppDrawerContext();
   const { cart, addToCart } = useAppFoodContext();
+  const { sendRequest } = useAppRecipeContext();
+
+  const handleClick = () => {
+    sendRequest();
+    addToCart(input);
+    setInput('');
+  }
 
   const [input, setInput] = useState('');
   const [alert, setAlert] = useState<boolean>(false);
@@ -84,8 +92,8 @@ const SearchBar = () => {
           <AddIcon
             onClick={() => {
               if (input.length > 0) {
-                addToCart(input);
-                setInput('');
+                handleClick()
+                
               }
             }}
           />
@@ -103,6 +111,7 @@ const SearchBar = () => {
           <SearchIcon
             onClick={() => {
               if (cart.length > 0) {
+                sendRequest();
                 navigate(`/recipe`);
               } else setAlert(true);
             }}

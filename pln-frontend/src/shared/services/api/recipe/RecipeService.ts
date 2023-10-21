@@ -11,20 +11,22 @@ const getRecipe = async (
   drink: String
 ): Promise<IRequest> => {
   try {
-    const { data } = await Api.get('/recipe', {
-      data: {
+    
+    const { data } = await Api.post('/recipemaker/query', {
+      data : {
         foods: foodArray,
         options: { difficult: difficulty, nutrition: nutrition, drink: drink },
-      },
-    });
+      }}
+    );
 
     if (data) {
+      console.log('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+      console.log(data)
       return data;
-    }
-
-    throw new Error('Error requesting recipe.');
+    } else throw new Error('Error requesting recipe.');
   } catch (error) {
     console.error(error);
+    console.log('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
     throw new Error(
       (error as { message: string }).message || 'Error requesting recipe.'
     );
