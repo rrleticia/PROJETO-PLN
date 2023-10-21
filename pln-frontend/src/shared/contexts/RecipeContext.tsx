@@ -7,7 +7,7 @@ interface IRecipeContextData {
   error: boolean;
   loading: boolean;
   setRecipe: (recipe: string) => void;
-  setError: (recipe: string) => void;
+  setError: (error: boolean) => void;
   setLoading: (loading: boolean) => void;
   sendRequest: () => Promise<void>;
 }
