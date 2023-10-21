@@ -1,7 +1,10 @@
 import {
+  Alert,
+  AlertTitle,
   Box,
   Button,
   CircularProgress,
+  Dialog,
   Paper,
   Typography,
   useTheme,
@@ -72,7 +75,7 @@ const ShowRecipe = () => {
     >
       <Paper sx={{ padding: theme.spacing(3) }}>
         <Typography
-          variant='body2'
+          variant='body1'
           style={{
             whiteSpace: 'pre-line',
           }}
@@ -81,6 +84,7 @@ const ShowRecipe = () => {
           {recipe}
         </Typography>
       </Paper>
+
       <AgainButton />
     </Box>
   );
