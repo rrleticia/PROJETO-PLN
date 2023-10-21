@@ -7,28 +7,22 @@ import {
   useTheme,
 } from '@mui/material';
 import ReplayIcon from '@mui/icons-material/Replay';
-import {
-  useAppFoodContext,
-  useAppRecipeContext,
-} from '../../shared/contexts';
+import { useAppFoodContext, useAppRecipeContext } from '../../shared/contexts';
 import { useNavigate } from 'react-router-dom';
-
 
 export const RecipePage = () => {
   return (
-    
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
 
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <DecideComponent />
-      </Box>
-    
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <DecideComponent />
+    </Box>
   );
 };
 
@@ -98,6 +92,8 @@ const AgainButton = () => {
 
   const { clearAll } = useAppFoodContext();
 
+  const { setRecipe } = useAppRecipeContext();
+
   const handleClick = () => {
     clearAll();
     navigate(`/search`);
@@ -117,7 +113,10 @@ const AgainButton = () => {
         variant='contained'
         size='large'
         endIcon={<ReplayIcon />}
-        onClick={handleClick}
+        onClick={() => {
+          handleClick();
+          setRecipe('');
+        }}
       >
         <Typography variant='h6'>Try Again!</Typography>
       </Button>

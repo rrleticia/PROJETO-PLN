@@ -71,12 +71,14 @@ export const FoodContextProvider: React.FC<IFoodContextProps> = ({
     );
     return result.recipe;
   };
+
   const clearAll = () => {
     setCart([]);
     setDifficulty('');
     setDrink('');
     setNutrition('');
   };
+
   return (
     <FoodContext.Provider
       value={{

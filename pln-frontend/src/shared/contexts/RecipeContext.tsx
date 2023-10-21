@@ -4,10 +4,12 @@ import { useAppFoodContext } from '.';
 
 interface IRecipeContextData {
   recipe: string;
+  error: boolean;
   loading: boolean;
   setRecipe: (recipe: string) => void;
+  setError: (recipe: string) => void;
   setLoading: (loading: boolean) => void;
-  sendRequest: () => Promise<String>;
+  sendRequest: () => Promise<void>;
 }
 
 const RecipeContext = createContext({} as IRecipeContextData);
@@ -26,9 +28,10 @@ export const RecipeContextProvider: React.FC<IRecipeContextProps> = ({
   const { cart, difficulty, nutrition, drink, clearAll } = useAppFoodContext();
 
   const [recipe, setRecipe] = useState('');
+  const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const sendRequest = async (): Promise<String> => {
+  const sendRequest = async (): Promise<void> => {
     const foodArray = cart.map((item) => {
       let target = item.toLowerCase().split(' ');
       return target.length > 0 ? target.join('-') : item;
@@ -40,13 +43,21 @@ export const RecipeContextProvider: React.FC<IRecipeContextProps> = ({
       drink
     );
     setLoading(false);
+    setRecipe(result.recipe);
     clearAll();
-    return result.recipe;
   };
 
   return (
     <RecipeContext.Provider
-      value={{ recipe, loading, setRecipe, setLoading, sendRequest }}
+      value={{
+        recipe,
+        error,
+        loading,
+        setRecipe,
+        setError,
+        setLoading,
+        sendRequest,
+      }}
     >
       {children}
     </RecipeContext.Provider>

@@ -56,7 +56,7 @@ const SearchBar = () => {
     sendRequest();
     addToCart(input);
     setInput('');
-  }
+  };
 
   const [input, setInput] = useState('');
   const [alert, setAlert] = useState<boolean>(false);
@@ -92,8 +92,7 @@ const SearchBar = () => {
           <AddIcon
             onClick={() => {
               if (input.length > 0) {
-                handleClick()
-                
+                handleClick();
               }
             }}
           />
