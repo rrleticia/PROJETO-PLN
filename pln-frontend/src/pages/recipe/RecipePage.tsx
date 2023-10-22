@@ -100,6 +100,7 @@ const AgainButton = () => {
 
   const handleClick = () => {
     clearAll();
+    setRecipe('');
     navigate(`/search`);
   };
 
@@ -117,10 +118,7 @@ const AgainButton = () => {
         variant='contained'
         size='large'
         endIcon={<ReplayIcon />}
-        onClick={() => {
-          handleClick();
-          setRecipe('');
-        }}
+        onClick={handleClick}
       >
         <Typography variant='h6'>Try Again!</Typography>
       </Button>
