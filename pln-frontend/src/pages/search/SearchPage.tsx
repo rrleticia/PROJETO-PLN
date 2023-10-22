@@ -53,7 +53,6 @@ const SearchBar = () => {
   const { sendRequest } = useAppRecipeContext();
 
   const handleClick = () => {
-    sendRequest();
     addToCart(input);
     setInput('');
   };
