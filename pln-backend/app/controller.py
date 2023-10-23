@@ -65,9 +65,9 @@ def compose_query(json: dict[str: any]):
 
     if options["drink"]:
         sentences += f"""\n-I want a {options['drink']} drink to go with the recipe,
-                            please sepparate the drink recommendation from the recipe
-                            and tell me why you think that is a great drink to go with
-                            the suggested recipe."""
+                            please sepparate the drink recommendation and put it after
+                            the recipe. Then, tell me why you think that is a great
+                            drink to go with the suggested recipe."""
 
     message = f"Act as a {professional} and suggest me a recipe according to the following recommendations:"
     message += sentences
