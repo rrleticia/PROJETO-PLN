@@ -48,7 +48,7 @@ const SearchBar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
 
-  const { toggleMenu } = useAppDrawerContext();
+  const { showMenu, toggleMenu } = useAppDrawerContext();
   const { cart, addToCart } = useAppFoodContext();
   const { sendRequest } = useAppRecipeContext();
 
@@ -116,7 +116,9 @@ const SearchBar = () => {
           />
         </IconButton>
       </Paper>
+
       <DisplayAlert alert={alert} setAlert={setAlert} />
+
       <DisplayFoods />
     </Box>
   );
@@ -163,7 +165,9 @@ const DisplayFoods = () => {
           }}
         >
           <Typography variant='body1' sx={{ display: 'flex' }}>
-            You can remove added foods by removing them from selection.
+            You can remove added foods by unselecting them from below.
+            <br /> Click on the search icon when you are ready to get your
+            recipe!
           </Typography>
           <List>
             {cart.map((item) => (
@@ -174,6 +178,7 @@ const DisplayFoods = () => {
       ) : (
         <Typography variant='body1' sx={{ display: 'flex' }}>
           Add foods by typing their names and clicking on the plus sign!
+          <br /> Select your options on the side according to what you want.
         </Typography>
       )}
     </Paper>
