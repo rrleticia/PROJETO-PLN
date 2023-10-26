@@ -119,6 +119,7 @@ const SearchBar = () => {
       <DisplayAlert alert={alert} setAlert={setAlert} />
       <DisplayFoods />
     </Box>
+
   );
 };
 

@@ -1,10 +1,7 @@
 import {
-  Alert,
-  AlertTitle,
   Box,
   Button,
   CircularProgress,
-  Dialog,
   Paper,
   Typography,
   useTheme,
@@ -12,6 +9,8 @@ import {
 import ReplayIcon from '@mui/icons-material/Replay';
 import { useAppFoodContext, useAppRecipeContext } from '../../shared/contexts';
 import { useNavigate } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export const RecipePage = () => {
   return (
@@ -69,20 +68,11 @@ const ShowRecipe = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-
         pt: theme.spacing(4),
       }}
     >
       <Paper sx={{ padding: theme.spacing(3) }}>
-        <Typography
-          variant='body1'
-          style={{
-            whiteSpace: 'pre-line',
-          }}
-          sx={{ maxWidth: '80vw' }}
-        >
-          {recipe}
-        </Typography>
+        <ReactMarkdown children={recipe} rehypePlugins={[rehypeRaw]}/>
       </Paper>
 
       <AgainButton />
@@ -98,9 +88,12 @@ const AgainButton = () => {
 
   const { setRecipe } = useAppRecipeContext();
 
+  const { setLoading } = useAppRecipeContext();
+
   const handleClick = () => {
     clearAll();
     setRecipe('');
+    setLoading(true);
     navigate(`/search`);
   };
 

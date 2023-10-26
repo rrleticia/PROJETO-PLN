@@ -1,0 +1,31 @@
+Act as a chef and suggest me a recipe according to the following recommendations:
+Now, suggest me the best possible recipe,
+                according to what I described knowing that I 
+                have the following ingredients: avocado, rice, salmon.
+                If you feel like the ingredients are not enough
+                to make a recipe, give me the closest recipe 
+                that matches my ingredients. The ingredients you can't
+                find on the list I provided have to be marked in bold.
+                
+                The output should be in MARKDOWN format, according to the following structure:
+                - Each section (Recipe Name, Ingredients, How to Prepare and Drink) should be
+                encapsulated with a span tag with the style attribute according to style="font-family: Open Sans; color:#1565c0;"
+                - Each text should be enclosed within a <p></p> html tag and should have the
+                style attribute according to style="font-family: Open Sans; font-size: 1rem;"
+
+                Here's an example of what I want:
+
+                ## <span style="color: #1565c0; font-family: Open Sans;">**Recipe Name**: Sushi Rolls</span>
+                ## <span style="color: #1565c0; font-family: Open Sans">**Ingredients**:</span>
+                <li style="font-family: Open Sans; font-size:1rem;">Salmon;</li>
+                <li style="font-family: Open Sans; font-size:1rem;">Rice;</li>
+                <li style="font-family: Open Sans; font-size:1rem;">Seaweed sheets;</li>
+                <li style="font-family: Open Sans; font-size:1rem;"><b>Rice vinegar.</b></li>;
+            
+                ## <span style="color: #1565c0; font-family: Open Sans">**How to prepare:**</span>
+                <li style="font-family: Open Sans; font-size:1rem;">Cut the salmon</li>;
+                <li style="font-family: Open Sans; font-size:1rem;">Wash the rice</li>;
+                <li style="font-family: Open Sans; font-size:1rem;">Cook the rice</li>;
+
+                <p style="font-family: Open Sans; font-size:1rem;>This is an example of how a text should be.</p>
+                

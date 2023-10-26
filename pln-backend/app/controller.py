@@ -2,6 +2,7 @@ import openai
 from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 from api_credentials import API_KEY
+from style_variables import *
 
 app = Flask(__name__)
 CORS(app)
@@ -40,9 +41,6 @@ def send_query():
         messages.append({"role": "assistant", "content": response})
         response_dict = {"recipe" : response}
 
-        with open("recipe.html", "w") as f:
-            f.write(response)
-            
         return jsonify(response_dict)
     
     except Exception as e:
@@ -80,26 +78,30 @@ def compose_query(json: dict[str: any]):
                 have the following ingredients: {foods_string}.
                 If you feel like the ingredients are not enough
                 to make a recipe, give me the closest recipe 
-                that matches my ingredients and mark in a bold tag which
-                ones I'm missing for that certain recipe you have.
+                that matches my ingredients. The ingredients you can't
+                find on the list I provided have to be marked in bold.
                 
-                The output should be in HTML format, according to this structure:
-                RECIPE NAME: The name of the recipe
-                INGREDIENTS: Each of the ingredients, listed by "-"
-                HOW TO PREPARE: A step by step guide with informations
-                regarding how to prepare the recipe
+                The output should be in MARKDOWN format, according to the following structure:
+                - Each section (Recipe Name, Ingredients, How to Prepare and Drink) should be
+                encapsulated with a span tag with the style attribute according to style="font-family: {P_FONT}; color:{TITLE_COLOR};"
+                - Each text should be enclosed within a <p></p> html tag and should have the
+                style attribute according to style="font-family: {P_FONT}; font-size: 1rem;"
 
                 Here's an example of what I want:
 
-                RECIPE NAME: Sushi Rolls
-                INGREDIENTS:
-                - Salmon;
-                - Rice;
-                - Seaweed sheets.
-                HOW TO PREPARE:
-                1. Cut the salmon;
-                2. Wash the rice;
-                3. Cook the rice.
+                ## <span style="color: {TITLE_COLOR}; font-family: {P_FONT};">**Recipe Name**: Sushi Rolls</span>
+                ## <span style="color: {TITLE_COLOR}; font-family: {P_FONT}">**Ingredients**:</span>
+                <li style="font-family: {P_FONT}; font-size:1rem;">Salmon;</li>
+                <li style="font-family: {P_FONT}; font-size:1rem;">Rice;</li>
+                <li style="font-family: {P_FONT}; font-size:1rem;">Seaweed sheets;</li>
+                <li style="font-family: {P_FONT}; font-size:1rem;"><b>Rice vinegar.</b></li>;
+            
+                ## <span style="color: {TITLE_COLOR}; font-family: {P_FONT}">**How to prepare:**</span>
+                <li style="font-family: {P_FONT}; font-size:1rem;">Cut the salmon</li>;
+                <li style="font-family: {P_FONT}; font-size:1rem;">Wash the rice</li>;
+                <li style="font-family: {P_FONT}; font-size:1rem;">Cook the rice</li>;
+
+                <p style="font-family: {P_FONT}; font-size:1rem;>This is an example of how a text should be.</p>
                 """
 
     return message
