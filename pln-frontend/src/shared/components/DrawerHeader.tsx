@@ -86,7 +86,8 @@ export const DrawerHeader: React.FC<IDrawerHeaderProps> = ({
           textAlign: 'center',
         }}
       >
-        Select one of each options avaliable if needed.
+        Select only one of each type avaliable, if needed. You can also clear
+        all options by clicking on the trash sign.
       </Typography>
     </Box>
   );
