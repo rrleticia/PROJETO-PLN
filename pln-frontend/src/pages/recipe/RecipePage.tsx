@@ -7,30 +7,24 @@ import {
   useTheme,
 } from '@mui/material';
 import ReplayIcon from '@mui/icons-material/Replay';
-import {
-  RecipeContextProvider,
-  useAppFoodContext,
-  useAppRecipeContext,
-} from '../../shared/contexts';
-
+import { useAppFoodContext, useAppRecipeContext } from '../../shared/contexts';
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 
 export const RecipePage = () => {
   return (
-    <RecipeContextProvider>
-      <Box
-        sx={{
-          display: 'flex',
-          flexDirection: 'column',
+    <Box
+      sx={{
+        display: 'flex',
+        flexDirection: 'column',
 
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <DecideComponent />
-      </Box>
-    </RecipeContextProvider>
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <DecideComponent />
+    </Box>
   );
 };
 
@@ -41,11 +35,6 @@ const DecideComponent = () => {
 
 const LoadingInfo = () => {
   const theme = useTheme();
-  const { sendRequest } = useAppRecipeContext();
-
-  useEffect(() => {
-    sendRequest;
-  });
 
   return (
     <Box
@@ -79,21 +68,15 @@ const ShowRecipe = () => {
       sx={{
         display: 'flex',
         flexDirection: 'column',
-
         pt: theme.spacing(4),
       }}
     >
       <Paper sx={{ padding: theme.spacing(3) }}>
-        <Typography
-          variant='body2'
-          style={{
-            whiteSpace: 'pre-line',
-          }}
-          sx={{ maxWidth: '80vw' }}
-        >
-          {recipe}
+        <Typography>
+        <ReactMarkdown children={recipe} rehypePlugins={[rehypeRaw]}/>
         </Typography>
       </Paper>
+
       <AgainButton />
     </Box>
   );
@@ -105,8 +88,14 @@ const AgainButton = () => {
 
   const { clearAll } = useAppFoodContext();
 
+  const { setRecipe } = useAppRecipeContext();
+
+  const { setLoading } = useAppRecipeContext();
+
   const handleClick = () => {
     clearAll();
+    setRecipe('');
+    setLoading(true);
     navigate(`/search`);
   };
 
