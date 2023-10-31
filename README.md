@@ -1,6 +1,6 @@
 # Recipe Maker
 
-#### This repository refers to a project made for the subject Natural Language Processing conducted by the Professor Leandro Balby Marinho at the Federal University of Campina Grande (UFCG).
+#### This repository refers to a project made for the Natural Language Processing course conducted by the Professors Leandro Balby Marinho and Ítallo de Sousa Silva at the Federal University of Campina Grande (UFCG).
 
 ### 1. How to run the project
 
