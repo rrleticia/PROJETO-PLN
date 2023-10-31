@@ -71,7 +71,7 @@ const ShowRecipe = () => {
         pt: theme.spacing(4),
       }}
     >
-      <Paper sx={{ padding: theme.spacing(3) }}>
+      <Paper sx={{ padding: theme.spacing(3), maxWidth: '75vw' }}>
         <Typography>
         <ReactMarkdown children={recipe} rehypePlugins={[rehypeRaw]}/>
         </Typography>

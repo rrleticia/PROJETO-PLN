@@ -1,4 +1,4 @@
 # Defines the settings variable like colors and fonts
 
-TITLE_COLOR = "#1565c0"
+TITLE_COLOR = "#a53038"
 P_FONT = "Open Sans"

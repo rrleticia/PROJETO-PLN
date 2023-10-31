@@ -1,18 +1,32 @@
 # Recipe Maker
 
-#### Este repositório é referente a uma atividade avaliativa para a disciplina Processamento de Linguagem Natural.
+#### This repository refers to a project made for the subject Natural Language Processing conducted by the Professor Leandro Balby Marinho at the Federal University of Campina Grande (UFCG).
 
-### 1. Execução.
+### 1. How to run the project
 
 #### 1.1 Backend
-1. Executar o comando de instalação dos pacotes necessários do Python:
+1. Install python's necessary packages through the following command:
 
     ```pip install -f requirements.txt```
 
-2. Dentro do diretório *pln-backend*, executar o script de instalação de pacotes com o pip através do comando:
+2. Inside the directory *pln-backend*, execute the command to install the packages, *note that this does require pip installed*:
 
     `pip install -e .`
 
-3. Navegar até a pasta de controller e executar o arquivo controller.py através do comando:
+3. Go to the controller folder and run the command:
 
-    `python controller.py`
+    `python controller.py` or `python3 controller.py`
+
+#### 1.2 Frontend
+
+1. Install the necessary package dependencies from node:
+
+   npm install
+
+2. Inside the folder pln-frontend, run the script to start the application:
+
+   npm run dev
+
+3. Go to the link and use the application.
+
+   http://localhost:5173/
